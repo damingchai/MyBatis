@@ -7,8 +7,6 @@ public class Test {
 
 		System.out.println("我爱北京天安门,我要离开北京,我是单身。");
 		System.out.println("woshizhongguoren");
-		System.out.println("woailiulu");
-
-	}
+			}
 
 }
