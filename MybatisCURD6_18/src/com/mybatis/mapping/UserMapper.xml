@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mybatis.dao.UserDao">
+	<!--如果bean中的属性和数据库表中的字段不一致，必须用resultMap，否则查不出结果 -->
+	<resultMap type="com.mybatis.bean.User" id="userResultMap">
+		<id column="u_id" property="uId" />
+		<result column="u_name" property="uName" />
+		<result column="u_age" property="uAge" />
+		<result column="role_id" property="roleId" />
+	</resultMap>
+	<!--插入 -->
+	<insert id="insert" parameterType="user">
+		insert into
+		user_1(u_name,u_age,role_id) values(#{uName},#{uAge},#{roleId});
+	</insert>
+	<!--查询全部 -->
+	<select id="getAll" resultMap="userResultMap">
+		select * from user_1;
+	</select>
+	<!--删除 -->
+	<delete id="delete" parameterType="user">
+		delete from user_1 where u_id=#{uId}
+	</delete>
+	<!--更新 -->
+	<update id="update" parameterType="user">
+		update user_1 set u_name=#{uName},u_age=#{uAge},role_id=#{roleId} where
+		u_id=#{uId}
+	</update>
+	<!--通过id查询  -->
+	<select id="getUserById" resultMap="userResultMap" parameterType="int">
+	 select * from user_1 where u_id=#{uId}
+	</select>
+	<!--模糊查询  -->
+	<select id="getUsersByLike" resultMap="userResultMap" parameterType="string">
+	 select * from user_1 where u_name like concat ('%',#{uName},'%')
+	</select>
+	
+</mapper>        
