@@ -9,32 +9,12 @@
 		<result column="u_name" property="uName" />
 		<result column="u_age" property="uAge" />
 		<result column="role_id" property="roleId" />
+		<association property="role" javaType="com.mybatis.bean.Role">
+			<id column="r_id" property="rId" />
+			<result column="r_name" property="rName" />
+		</association>
 	</resultMap>
-	<!--插入 -->
-	<insert id="insert" parameterType="user">
-		insert into
-		user_1(u_name,u_age,role_id) values(#{uName},#{uAge},#{roleId});
-	</insert>
-	<!--查询全部 -->
-	<select id="getAll" resultMap="userResultMap">
-		select * from user_1;
+	<select id="getList" resultMap="userResultMap">
+		select u.u_name,u.u_age,r.r_id,r.r_name from user_1 u,role r where u.`role_id`=r.`r_id`;
 	</select>
-	<!--删除 -->
-	<delete id="delete" parameterType="user">
-		delete from user_1 where u_id=#{uId}
-	</delete>
-	<!--更新 -->
-	<update id="update" parameterType="user">
-		update user_1 set u_name=#{uName},u_age=#{uAge},role_id=#{roleId} where
-		u_id=#{uId}
-	</update>
-	<!--通过id查询  -->
-	<select id="getUserById" resultMap="userResultMap" parameterType="int">
-	 select * from user_1 where u_id=#{uId}
-	</select>
-	<!--模糊查询  -->
-	<select id="getUsersByLike" resultMap="userResultMap" parameterType="string">
-	 select * from user_1 where u_name like concat ('%',#{uName},'%')
-	</select>
-	
 </mapper>        

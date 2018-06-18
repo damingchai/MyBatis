@@ -5,6 +5,7 @@ public class User {
 	private String uName;
 	private int uAge;
 	private int roleId;
+	private Role role;
 	public int getuId() {
 		return uId;
 	}
@@ -30,9 +31,17 @@ public class User {
 	public void setRoleId(int roleId) {
 		this.roleId = roleId;
 	}
+	
+	public Role getRole() {
+		return role;
+	}
+	public void setRole(Role role) {
+		this.role = role;
+	}
 	@Override
 	public String toString() {
-		return "User [uId=" + uId + ", uName=" + uName + ", uAge=" + uAge + ", roleId=" + roleId + "]";
+		return "User [uId=" + uId + ", uName=" + uName + ", uAge=" + uAge + ", roleId=" + roleId + ", role=" + role
+				+ "]";
 	}
 	
 
