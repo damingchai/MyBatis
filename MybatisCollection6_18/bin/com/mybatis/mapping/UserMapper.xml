@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mybatis.dao.UserDao">
+	<!--如果bean中的属性和数据库表中的字段不一致，必须用resultMap，否则查不出结果 -->
+	<resultMap type="com.mybatis.bean.User" id="userResultMap">
+		<id column="u_id" property="uId" />
+		<result column="u_name" property="uName" />
+		<result column="u_age" property="uAge" />
+		<result column="role_id" property="roleId" />
+		<!--注意collection标签里面用的是ofType，association标签里面用的是javaType  -->
+		<collection property="addressList" ofType="com.mybatis.bean.Address">
+		<id column="a_id" property="aId"/>
+		<result column="a_name" property="aName"/>
+		<result column="user_id" property="userId"/>
+		</collection>
+	</resultMap>
+	<select id="getListByUserId" resultMap="userResultMap">
+		select u.*,a.a_id,a.a_name from user_1 u,address a where u.u_id=a.user_id and u.u_id=#{uId};
+	</select>
+</mapper>        
